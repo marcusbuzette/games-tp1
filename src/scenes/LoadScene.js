@@ -61,7 +61,7 @@ export class LoadScene extends Phaser.Scene{
     }
 
     create() {
-        // this.scale.resize(1008,70);
+        this.add.text(450, 30, 'LOADING...',{fontFamily: '"Roboto Condensed"',color: '#FFF'});
 
     }
 }
