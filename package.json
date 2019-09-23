@@ -1,0 +1,28 @@
+{
+  "name": "tp1",
+  "version": "1.0.0",
+  "description": "TP1 Aula de Games CEFET-MG",
+  "main": "index.js",
+  "dependencies": {
+    "easystarjs": "^0.4.3",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "generate-maze": "^0.2.0",
+    "nodemon": "^1.19.2",
+    "phaser": "^3.19.0",
+    "phaser-ce": "^2.13.1",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "TP1",
+    "GAMES"
+  ],
+  "author": "Marcus Buzette",
+  "license": "ISC"
+}
