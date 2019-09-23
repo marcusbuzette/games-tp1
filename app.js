@@ -5,6 +5,7 @@ const http = require('http')
 const app = express();
 
 
+app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
@@ -24,6 +25,6 @@ server.on('error', (err) => {
 	console.log('Erro no servidor: ' + err)
 })
 
-server.listen(8000, () => {
-  console.log('Example app listening on port 8000!')
+server.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
 });
