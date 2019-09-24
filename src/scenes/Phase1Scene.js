@@ -199,6 +199,7 @@ export class Phase1Scene extends Phaser.Scene{
             this.textTime.setText(this.timeLeft);
 
             if (this.timeLeft === 0) {
+                clearInterval(this.countDown);
                 this.scene.start(CST.SCENES.END, {levels: this.levels})
             }
 
