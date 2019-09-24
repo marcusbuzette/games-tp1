@@ -239,6 +239,9 @@ export class Phase1Scene extends Phaser.Scene{
         }
 
         if (this.keyboard.R.isDown ===  true) {
+            clearInterval(this.countDown);
+            this.path = [];
+            this.music.pause();
             this.scene.start(CST.SCENES.PHASE1, {playerVelocity: 40, mazeHeight :13,
                 timeLeft: 100, starsCollected: 0, levels: 0});
         }
@@ -246,11 +249,13 @@ export class Phase1Scene extends Phaser.Scene{
         if (this.keyboard.F.isDown === true) {
 
             if(this.horizontal && !this.rotating) {
+                clearInterval(this.countDown);
                 this.scale.resize(50,720)
                 this.horizontal = false
                 this.rotating = true
             }
             if (!this.horizontal && !this.rotating){
+                clearInterval(this.countDown);
                 this.scale.resize(1008,70)
                 this.horizontal = true
                 this.rotating = true
