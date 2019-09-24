@@ -235,6 +235,7 @@ export class Phase1Scene extends Phaser.Scene{
         }
 
         if (this.keyboard.M.isDown ===  true) {
+            clearInterval(this.countDown);
             this.scene.start(CST.SCENES.MENU)
         }
 
