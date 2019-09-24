@@ -25,6 +25,8 @@ export class Phase1Scene extends Phaser.Scene{
     textTime;
     levels;
     music;
+    horizontal;
+    rotating;
 
     //todo  music, timer, phases
 
@@ -47,6 +49,9 @@ export class Phase1Scene extends Phaser.Scene{
 
     preload() {
         console.log(this.path)
+        this.scale.resize(1008,70)
+        this.horizontal = true;
+        this.rotating = false;
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('pleft', { start: 0, end: 3 }),
@@ -155,7 +160,7 @@ export class Phase1Scene extends Phaser.Scene{
         this.music = this.sound.add('music', {volume: 0.2, mute: false, loop: true});
         this.music.play();
         this.mazeGraphics.clear();
-        this.keyboard = this.input.keyboard.addKeys("W, A, S, D,UP,LEFT,RIGHT,DOWN,R,M");
+        this.keyboard = this.input.keyboard.addKeys("W, A, S, D,UP,LEFT,RIGHT,DOWN,R,M,F");
         this.cameras.main.setRoundPixels(true);
         this.cameras.main.setBackgroundColor('#3f2a14');
         this.keyObj = this.input.keyboard.addKey('R');
@@ -231,6 +236,30 @@ export class Phase1Scene extends Phaser.Scene{
 
         if (this.keyboard.M.isDown ===  true) {
             this.scene.start(CST.SCENES.MENU)
+        }
+
+        if (this.keyboard.R.isDown ===  true) {
+            this.scene.start(CST.SCENES.PHASE1, {playerVelocity: 40, mazeHeight :13,
+                timeLeft: 100, starsCollected: 0, levels: 0});
+        }
+
+        if (this.keyboard.F.isDown === true) {
+
+            if(this.horizontal && !this.rotating) {
+                this.scale.resize(50,720)
+                this.horizontal = false
+                this.rotating = true
+            }
+            if (!this.horizontal && !this.rotating){
+                this.scale.resize(1008,70)
+                this.horizontal = true
+                this.rotating = true
+            }
+
+        }
+
+        if (this.keyboard.F.isUp === true) {
+            this.rotating = false
         }
         //
         // this.keyObj.on('up', (event)=> {
