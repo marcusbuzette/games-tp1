@@ -249,7 +249,6 @@ export class Phase1Scene extends Phaser.Scene{
         if (this.keyboard.F.isDown === true) {
 
             if(this.horizontal && !this.rotating) {
-                clearInterval(this.countDown);
                 this.scale.resize(50,720)
                 this.horizontal = false
                 this.rotating = true
