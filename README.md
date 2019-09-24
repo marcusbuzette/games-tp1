@@ -22,9 +22,9 @@ O JOGO:
 
 	Objetivos: Concluir o maior numero de labiriontos antes que o tempo acabe.
 
-	Video: [https://youtu.be/FNeBit-VlkM](https://youtu.be/FNeBit-VlkM)
+	Video: https://youtu.be/FNeBit-VlkM
 
-	Jogue em : [https://tp1-marcus.herokuapp.com](https://tp1-marcus.herokuapp.com)
+	Jogue em : https://tp1-marcus.herokuapp.com
 
 
 
