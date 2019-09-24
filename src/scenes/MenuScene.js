@@ -19,8 +19,6 @@ export class MenuScene extends Phaser.Scene{
 
         this.input.keyboard.on('keydown', (event) => {
             if (event.keyCode === 32) {
-                this.music = this.sound.add('music', {volume: 0.2, mute: false, loop: true});
-                this.music.play();
                 this.scene.start(CST.SCENES.PHASE1, {playerVelocity: 40, mazeHeight :13,
                     timeLeft: 100, starsCollected: 0, levels: 0})
             }

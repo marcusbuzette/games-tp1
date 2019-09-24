@@ -24,6 +24,7 @@ export class Phase1Scene extends Phaser.Scene{
     starHud;
     textTime;
     levels;
+    music;
 
     //todo  music, timer, phases
 
@@ -151,6 +152,8 @@ export class Phase1Scene extends Phaser.Scene{
     }
 
     create () {
+        this.music = this.sound.add('music', {volume: 0.2, mute: false, loop: true});
+        this.music.play();
         this.mazeGraphics.clear();
         this.keyboard = this.input.keyboard.addKeys("W, A, S, D,UP,LEFT,RIGHT,DOWN,R,M");
         this.cameras.main.setRoundPixels(true);
@@ -182,12 +185,21 @@ export class Phase1Scene extends Phaser.Scene{
         // this.scale.resize(720,70);
         this.cameras.main.setBounds(0,0,720,(this.mazeHeight - 1) * this.tileSize);
         this.scale.game.height = this.mazeHeight * this.tileSize;
+
+
+
+
         this.countDown = setInterval(()=> {
             this.timeLeft -= 1;
             this.textTime.setText(this.timeLeft);
 
             if (this.timeLeft === 0) {
                 this.scene.start(CST.SCENES.END, {levels: this.levels})
+            }
+
+            if (this.timeLeft <= 30) {
+                // this.music.setSeek(0);
+                this.music.setRate(1.3);
             }
         }, 1000);
         this.createHud();
@@ -292,6 +304,7 @@ export class Phase1Scene extends Phaser.Scene{
         if (this.key.active === false) {
             clearInterval(this.countDown);
             this.path = [];
+            this.music.pause();
             this.scene.restart({playerVelocity: this.playerVelocity, mazeHeight :this.mazeHeight + 2,
                 timeLeft: this.timeLeft, starsCollected: this.starsCollected, levels: this.levels + 1})
         } else {
