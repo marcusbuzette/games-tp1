@@ -254,7 +254,6 @@ export class Phase1Scene extends Phaser.Scene{
                 this.rotating = true
             }
             if (!this.horizontal && !this.rotating){
-                clearInterval(this.countDown);
                 this.scale.resize(1008,70)
                 this.horizontal = true
                 this.rotating = true
