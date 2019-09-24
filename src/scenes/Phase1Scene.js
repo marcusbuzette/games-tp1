@@ -45,6 +45,7 @@ export class Phase1Scene extends Phaser.Scene{
     }
 
     preload() {
+        console.log(this.path)
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('pleft', { start: 0, end: 3 }),
@@ -216,8 +217,8 @@ export class Phase1Scene extends Phaser.Scene{
             this.player.play('turn', true);
         }
 
-        if (this.keyboard.R.isDown ===  true) {
-            this.scene.start(CST.SCENES.MENU, "testeee")
+        if (this.keyboard.M.isDown ===  true) {
+            this.scene.start(CST.SCENES.MENU)
         }
         //
         // this.keyObj.on('up', (event)=> {
@@ -246,7 +247,7 @@ export class Phase1Scene extends Phaser.Scene{
         for(let i = 0; i < this.mazeHeight ; i++) {
             for (let j = 0; j < (this.mazeWidth - 2) ; j++) {
                 if(this.maze[i][j] === 0) {
-                    let random = Phaser.Math.Between(0,20)
+                    let random = Phaser.Math.Between(0,40)
                     if (random === 2) {
                         this.coins.create(j * this.tileSize, i * this.tileSize, 'star').setScale(0.5);
                     }
@@ -260,13 +261,15 @@ export class Phase1Scene extends Phaser.Scene{
     }
 
     randomKey () {
+        this.path.shift()
+        this.path.shift()
         const pos = Phaser.Math.RND.pick(this.path)
         this.key = this.physics.add.sprite(pos.j * this.tileSize, pos.i * this.tileSize,'key');
     }
 
     collectCoin (player, star) {
         this.playerVelocity += 5;
-        this.sound.play('star');
+        this.sound.play('star', {volume: 0.5});
         this.starsCollected += 1;
         this.starText.setText(this.starsCollected)
         star.disableBody(true,true);
@@ -276,19 +279,19 @@ export class Phase1Scene extends Phaser.Scene{
         this.sound.play('key');
         this.key.disableBody(true, true);
         this.exit.setTexture('blue').setScale(0.05);
-        this.add.sprite(950,30, 'key').setRotation(180).setScale(2)
+        this.add.sprite(950,30, 'key').setRotation(180).setScale(2).setScrollFactor(0)
     }
 
     collectClock (player, clock) {
-        this.sound.play('clock');
+        this.sound.play('clock', {volume: 0.5});
         clock.disableBody(true,true)
         this.timeLeft += 15;
     }
 
     exitFunction(player, exit) {
         if (this.key.active === false) {
-            console.log('passou')
             clearInterval(this.countDown);
+            this.path = [];
             this.scene.restart({playerVelocity: this.playerVelocity, mazeHeight :this.mazeHeight + 2,
                 timeLeft: this.timeLeft, starsCollected: this.starsCollected, levels: this.levels + 1})
         } else {
@@ -298,9 +301,13 @@ export class Phase1Scene extends Phaser.Scene{
 
     createHud() {
         this.clockHud = this.physics.add.sprite(810, 15, 'clock').setScale(0.05);
+        this.clockHud.setScrollFactor(0)
         this.textTime = this.add.text(840, 8, this.timeLeft, {fontFamily: '"Roboto Condensed"',color: '#FFF'})
+        this.textTime.setScrollFactor(0)
         this.starHud = this.coins.create(810, 50, 'star').setScale(0.8);
+        this.starHud.setScrollFactor(0)
         this.starText = this.add.text(840, 42, this.starsCollected, {fontFamily: '"Roboto Condensed"',color: '#FFF'})
+        this.starText.setScrollFactor(0)
 
     }
 

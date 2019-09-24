@@ -10,7 +10,6 @@ export class MenuScene extends Phaser.Scene{
     }
 
     init(data) {
-        console.log(data)
     }
 
     create() {
